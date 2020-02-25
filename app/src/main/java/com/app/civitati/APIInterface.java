@@ -14,4 +14,6 @@ public interface APIInterface {
     @GET("/crud.php")
     Call<ResponseBody> registerInApp(@Query("NICKNAME") String nickName, @Query("PASSWORD") String password, @Query("TYPE") String type );
 
+    @GET("/crud.php")
+    Call<ResponseBody> loginInApp(@Query("NICKNAME") String nickName, @Query("PASSWORD") String password, @Query("TYPE") String type );
 }
