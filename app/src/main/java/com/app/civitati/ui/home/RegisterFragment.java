@@ -40,6 +40,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         final TextView enterPassword = root.findViewById(R.id.enterPassword);
         final TextView enterLogin = root.findViewById(R.id.enterLogin);
+        final TextView regResult = root.findViewById(R.id.regResult);
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<ResponseBody> tryToRegister = apiInterface.registerInApp(enterLogin.getText().toString(), enterPassword.getText().toString(), "I" );
 
@@ -47,25 +48,34 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    System.out.println(response.body().string());
-                    Log.i("Civitati", "Success in register. ");
-                    Log.i("Civitati",  response.body().string() );
-                    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-                    transaction.replace(R.id.regFrag,  new HomeFragment());
-                    transaction.commit();
+                    String success = "New record created successfully";
+                    String reponseString = response.body().string();
+                    System.out.println(reponseString);
+                    Log.i("Civitati",  reponseString );
+                    if(success.equals(reponseString)) {
+                        Log.i("Civitati", "Success in register. ");
+                        regResult.setText("Success in register");
+                        enterPassword.setVisibility(View.INVISIBLE);
+                        enterLogin.setVisibility(View.INVISIBLE);
+                        regResult.setVisibility(View.INVISIBLE);
+                        Button button = (Button)root.findViewById(R.id.registerBtn);
+                        button.setVisibility(View.INVISIBLE);
+                        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                        transaction.replace(R.id.regFrag,  new HomeFragment());
+                        transaction.commit();
+                    }
+                    else {
+                        regResult.setText("Fail to register");
+                        regResult.setVisibility(View.VISIBLE);
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 //e.printStackTrace();
-                enterPassword.setVisibility(View.INVISIBLE);
-                enterLogin.setVisibility(View.INVISIBLE);
-                Button button = (Button)root.findViewById(R.id.registerBtn);
-                button.setVisibility(View.INVISIBLE);
                 Log.i("Civitati", "FAIL to register. Error is" );
             }
         });
