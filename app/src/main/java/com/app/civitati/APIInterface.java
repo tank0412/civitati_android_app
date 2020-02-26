@@ -11,9 +11,15 @@ import retrofit2.http.Query;
 
 public interface APIInterface {
 
-    @GET("/crud.php")
+    @GET("/users.php")
     Call<ResponseBody> registerInApp(@Query("NICKNAME") String nickName, @Query("PASSWORD") String password, @Query("TYPE") String type );
 
-    @GET("/crud.php")
+    @GET("/users.php")
     Call<ResponseBody> loginInApp(@Query("NICKNAME") String nickName, @Query("PASSWORD") String password, @Query("TYPE") String type );
+
+    @GET("/needy.php")
+    Call<ResponseBody> addNeedy(@Query("ID") int id, @Query("NAME") String name, @Query("HELP_REASON") String reason, @Query("ADDRESS") String address, @Query("TELEPHONE") String telephone, @Query("TYPE") String type );
+
+    @GET("/needy.php")
+    Call<ResponseBody> needyCount(@Query("TYPE") String type );
 }

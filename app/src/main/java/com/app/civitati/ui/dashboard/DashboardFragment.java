@@ -4,32 +4,39 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.app.civitati.R;
+import com.app.civitati.ui.home.RegisterFragment;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements View.OnClickListener {
 
-    private DashboardViewModel dashboardViewModel;
+    View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        Button addNeedyBtn = root.findViewById(R.id.addNeedyBtn);
+        addNeedyBtn.setOnClickListener(this);
+
         return root;
+    }
+
+    @Override
+    public void onClick(View v) {
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.dashboard,  new AddNeedyFragment());
+        Button addNeedyBtn = root.findViewById(R.id.addNeedyBtn);
+        addNeedyBtn.setVisibility(View.INVISIBLE);
+        transaction.commit();
     }
 }
