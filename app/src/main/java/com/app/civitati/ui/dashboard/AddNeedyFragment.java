@@ -38,6 +38,7 @@ public class AddNeedyFragment extends Fragment implements View.OnClickListener {
         final TextView helpReason = root.findViewById(R.id.helpReason);
         final TextView needyAddress = root.findViewById(R.id.needyAddress);
         final TextView needyTelephone = root.findViewById(R.id.needyTelephone);
+        final TextView needyAddInfo = root.findViewById(R.id.needyAddInfo);
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         final APIInterface apiInterfaceF = apiInterface;
         Call<ResponseBody> getNeedyCount = apiInterface.needyCount("SA" );
@@ -54,7 +55,21 @@ public class AddNeedyFragment extends Fragment implements View.OnClickListener {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             try {
+                                String success = "New record created successfully";
                                 String reponse = response.body().string();
+                                if(success.equals(reponse)) {
+                                    System.out.println("Add needy success");
+                                    Log.i("Civitati", "Success to add needy. ");
+                                    needyAddInfo.setText("Needy add success");
+                                    needyAddInfo.setVisibility(View.VISIBLE);
+                                }
+                                else {
+                                    System.out.println("Add needy fail");
+                                    Log.i("Civitati", "Fail to add needy. ");
+                                    needyAddInfo.setText("Needy add fail");
+                                    needyAddInfo.setVisibility(View.VISIBLE);
+
+                                }
                                 System.out.println(reponse);
 
 
