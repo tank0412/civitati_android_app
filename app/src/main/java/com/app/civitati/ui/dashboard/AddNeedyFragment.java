@@ -41,7 +41,7 @@ public class AddNeedyFragment extends Fragment implements View.OnClickListener {
         final TextView needyAddInfo = root.findViewById(R.id.needyAddInfo);
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         final APIInterface apiInterfaceF = apiInterface;
-        Call<ResponseBody> getNeedyCount = apiInterface.needyCount("SA" );
+        Call<ResponseBody> getNeedyCount = apiInterface.needyCount("SC" );
         getNeedyCount.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

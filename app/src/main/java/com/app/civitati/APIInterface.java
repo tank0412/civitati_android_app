@@ -1,5 +1,9 @@
 package com.app.civitati;
 
+import com.app.civitati.ui.dashboard.Needy;
+
+import java.util.ArrayList;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -22,4 +26,7 @@ public interface APIInterface {
 
     @GET("/needy.php")
     Call<ResponseBody> needyCount(@Query("TYPE") String type );
+
+    @GET("/needy.php")
+    Call<ArrayList<Needy>>getAllNeedies(@Query("TYPE") String type );
 }
