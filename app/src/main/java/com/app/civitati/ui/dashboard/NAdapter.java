@@ -34,11 +34,11 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull NeedyViewHolder holder, int position) {
-        holder.needyId.setText(needies.get(position).getId().toString());
-        holder.needyName.setText(needies.get(position).getName());
-        holder.needyHelpReason.setText(needies.get(position).getHelpReason());
-        holder.needyAddress.setText(needies.get(position).getAdress());
-        holder.needyTelephone.setText((CharSequence) needies.get(position).getTelephone().toString());
+        holder.needyId.setText("ID: " + needies.get(position).getId().toString());
+        holder.needyName.setText("Name: " + needies.get(position).getName());
+        holder.needyHelpReason.setText("Help Reason: " + needies.get(position).getHelpReason());
+        holder.needyAddress.setText("Address: " + needies.get(position).getAdress());
+        holder.needyTelephone.setText("Telephone: " + (CharSequence) needies.get(position).getTelephone().toString());
 
         SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
                 Locale.ENGLISH);
@@ -51,7 +51,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
         SimpleDateFormat print = new SimpleDateFormat("dd-MM-yy");
         //System.out.println(print.format(parsedDate));
         //System.out.println(parsedDate.toString());
-        holder.needyDate.setText(print.format(parsedDate));
+        holder.needyDate.setText("Date: " + print.format(parsedDate));
     }
 
     @Override
