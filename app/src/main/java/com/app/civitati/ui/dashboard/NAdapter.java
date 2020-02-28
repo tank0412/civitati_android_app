@@ -35,7 +35,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
         holder.needyHelpReason.setText(needies.get(position).getHelpReason());
         holder.needyAddress.setText(needies.get(position).getAdress());
         holder.needyTelephone.setText((CharSequence) needies.get(position).getTelephone().toString());
-        //holder.needyDate.setText(needies.get(position).getSubmitDate());
+        holder.needyDate.setText(needies.get(position).getSubmitDate().toString());
     }
 
     @Override
