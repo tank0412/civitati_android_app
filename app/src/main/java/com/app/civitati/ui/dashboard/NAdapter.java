@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.civitati.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
     List<Needy> needies;
@@ -35,7 +39,19 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
         holder.needyHelpReason.setText(needies.get(position).getHelpReason());
         holder.needyAddress.setText(needies.get(position).getAdress());
         holder.needyTelephone.setText((CharSequence) needies.get(position).getTelephone().toString());
-        holder.needyDate.setText(needies.get(position).getSubmitDate().toString());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
+                Locale.ENGLISH);
+        Date parsedDate = null;
+        try {
+            parsedDate = sdf.parse(needies.get(position).getSubmitDate().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat print = new SimpleDateFormat("dd-MM-yy");
+        //System.out.println(print.format(parsedDate));
+        //System.out.println(parsedDate.toString());
+        holder.needyDate.setText(print.format(parsedDate));
     }
 
     @Override
