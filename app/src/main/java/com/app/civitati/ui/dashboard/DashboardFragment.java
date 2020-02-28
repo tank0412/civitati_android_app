@@ -1,6 +1,7 @@
 package com.app.civitati.ui.dashboard;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.civitati.APIClient;
 import com.app.civitati.APIInterface;
@@ -34,13 +37,32 @@ import retrofit2.Response;
 public class DashboardFragment extends Fragment implements View.OnClickListener {
 
     View root;
+    ArrayList<Needy> needyArrayList;
+    NAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         Button addNeedyBtn = root.findViewById(R.id.addNeedyBtn);
         addNeedyBtn.setOnClickListener(this);
+
+        RecyclerView rv = root.findViewById(R.id.rv);
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        rv.setLayoutManager(llm);
+        needyArrayList = new ArrayList<Needy>();
+        /*
+        Needy needy = new Needy();
+        needy.setAdress("a");
+        needy.setHelpReason("b");
+        needy.setId(1);
+        needy.setName("b");
+        needy.setTelephone(BigInteger.valueOf(345645345));
+        needyArrayList.add(needy);
+         */
+
+        adapter = new NAdapter(needyArrayList );
+        rv.setAdapter(adapter);
         getAllNeedies();
         return root;
     }
@@ -61,8 +83,13 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         tryToRegister.enqueue(new Callback<ArrayList<Needy>>() {
             @Override
             public void onResponse(Call<ArrayList<Needy>> call, Response<ArrayList<Needy>> response) {
-                ArrayList jsonArray = response.body();
+                ArrayList<Needy> jsonArray = response.body();
+                needyArrayList.addAll(jsonArray);
+                Log.i("Civitati", "GOT NEEDY ARRAY" );
+                System.out.println("GOT NEEDDY");
+                adapter.notifyDataSetChanged();
 
+                /*
                 for (int i = 0; i < jsonArray.size(); i++) {
                     Needy needy = (Needy) jsonArray.get(i);
 
@@ -79,6 +106,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     Date submitDate = needy.getSubmitDate();
                     //System.out.println(submitDate);
                 }
+                 */
 
             }
             @Override
