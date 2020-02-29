@@ -1,5 +1,7 @@
 package com.app.civitati.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,6 +87,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         final TextView enterPassword = root.findViewById(R.id.enterPassword);
         final TextView enterLogin = root.findViewById(R.id.enterLogin);
+        final TextView logInfo = root.findViewById(R.id.loginInfo);
+        final Button buttonLogin =  root.findViewById(R.id.loginBtn);;
+        final Button buttonRegFinal = (Button)root.findViewById(R.id.enterRegBtn);
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
         Call<ResponseBody> tryToRegister = apiInterface.loginInApp(enterLogin.getText().toString(), enterPassword.getText().toString(), "S" );
 
@@ -99,9 +104,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if(success.equals(reposne)) {
                         System.out.println("Login success");
                         Log.i("Civitati", "Success to login. ");
-                        loginInfo.setText("Login success");
-                        loginInfo.setVisibility(View.VISIBLE);
+
+                        SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("CIVITATI_PREFERENCES", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mySharedPreferences.edit();
+                        editor.putString("CIVITATI_PREFERENCES", enterLogin.getText().toString());
+                        editor.apply();
+
+                        //loginInfo.setText("Login success");
+                        //loginInfo.setVisibility(View.VISIBLE);
+
                         //Log.i("Civitati", response.body().string());
+
+                        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                        transaction.replace(R.id.regHome,  new HelpNeedyFragment());
+                        //transaction.addToBackStack(null); // TODO: Исправить баг: при нажатии на кнопку Назад, вернет к пред фрагменту, где будет скрыт layout
+
+                        enterPassword.setVisibility(View.INVISIBLE);
+                        enterLogin.setVisibility(View.INVISIBLE);
+                        logInfo.setVisibility(View.INVISIBLE);
+                        buttonRegFinal.setVisibility(View.INVISIBLE);
+                        buttonLogin.setVisibility(View.INVISIBLE);
+
+
+                        transaction.commit();
+
+
                     }
                     if(fail.equals(reposne)) {
                         System.out.println("Login fail");

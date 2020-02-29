@@ -29,4 +29,10 @@ public interface APIInterface {
 
     @GET("/needy.php")
     Call<ArrayList<Needy>>getAllNeedies(@Query("TYPE") String type );
+
+    @GET("/helpneedy.php")
+    Call<ResponseBody> addHelpNeedy(@Query("ID") int id, @Query("ASSISTANT_NICKNAME") String assistantNickname, @Query("NEEDY_ID") String needyId, @Query("HELP_INFO") String helpInfo, @Query("HELP_DATE") String helpDate, @Query("TYPE") String type );
+
+    @GET("/helpneedy.php")
+    Call<ResponseBody> helpNeedyCount(@Query("TYPE") String type );
 }
