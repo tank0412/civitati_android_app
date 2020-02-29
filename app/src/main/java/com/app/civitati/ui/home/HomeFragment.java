@@ -33,40 +33,48 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+
+        SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("CIVITATI_PREFERENCES", Context.MODE_PRIVATE);
         root = inflater.inflate(R.layout.fragment_home, container, false);
-        makeElementVisible();
-        Button button = (Button)root.findViewById(R.id.loginBtn);
-        button.setOnClickListener(this);
 
-        Button buttonReg = (Button)root.findViewById(R.id.enterRegBtn);
+        if(mySharedPreferences.contains("CIVITATI_PREFERENCES")) {
+            root = inflater.inflate(R.layout.fragment_help_needy, container, false);
+            mySharedPreferences.getString("CIVITATI_PREFERENCES", "");
+            FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+            transaction.replace(R.id.helpNeedyInfo,  new HelpNeedyFragment());
+            transaction.commit();
+        }
+        else {
+            makeElementVisible();
+            Button buttonReg = (Button)root.findViewById(R.id.enterRegBtn);
+            final TextView enterPassword = root.findViewById(R.id.enterPassword);
+            final TextView enterLogin = root.findViewById(R.id.enterLogin);
+            final TextView logInfo = root.findViewById(R.id.loginInfo);
+            Button button = (Button)root.findViewById(R.id.loginBtn);
+            button.setOnClickListener(this);
+            final Button buttonLogin = button;
+            final Button buttonRegFinal = (Button)root.findViewById(R.id.enterRegBtn);
+
+            View.OnClickListener oclBtnRegister = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+                    transaction.replace(R.id.regHome,  new RegisterFragment());
+                    //transaction.addToBackStack(null); // TODO: Исправить баг: при нажатии на кнопку Назад, вернет к пред фрагменту, где будет скрыт layout
+
+                    enterPassword.setVisibility(View.INVISIBLE);
+                    enterLogin.setVisibility(View.INVISIBLE);
+                    logInfo.setVisibility(View.INVISIBLE);
+                    buttonRegFinal.setVisibility(View.INVISIBLE);
+                    buttonLogin.setVisibility(View.INVISIBLE);
 
 
-        final TextView enterPassword = root.findViewById(R.id.enterPassword);
-        final TextView enterLogin = root.findViewById(R.id.enterLogin);
-        final TextView logInfo = root.findViewById(R.id.loginInfo);
-        final Button buttonLogin = button;
-        final Button buttonRegFinal = (Button)root.findViewById(R.id.enterRegBtn);
+                    transaction.commit();
+                }
+            };
+            buttonReg.setOnClickListener(oclBtnRegister);
+        }
 
-        View.OnClickListener oclBtnRegister = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-                transaction.replace(R.id.regHome,  new RegisterFragment());
-                //transaction.addToBackStack(null); // TODO: Исправить баг: при нажатии на кнопку Назад, вернет к пред фрагменту, где будет скрыт layout
-
-                enterPassword.setVisibility(View.INVISIBLE);
-                enterLogin.setVisibility(View.INVISIBLE);
-                logInfo.setVisibility(View.INVISIBLE);
-                buttonRegFinal.setVisibility(View.INVISIBLE);
-                buttonLogin.setVisibility(View.INVISIBLE);
-
-
-                transaction.commit();
-            }
-        };
-        buttonReg.setOnClickListener(oclBtnRegister);
         return root;
     }
 
