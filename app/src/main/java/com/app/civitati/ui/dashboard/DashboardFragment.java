@@ -73,6 +73,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         transaction.replace(R.id.dashboard,  new AddNeedyFragment());
         Button addNeedyBtn = root.findViewById(R.id.addNeedyBtn);
         addNeedyBtn.setVisibility(View.INVISIBLE);
+        RecyclerView rv = root.findViewById(R.id.rv);
+        rv.setVisibility(View.INVISIBLE);
         transaction.commit();
     }
 
