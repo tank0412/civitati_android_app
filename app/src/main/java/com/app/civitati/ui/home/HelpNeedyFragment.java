@@ -58,6 +58,9 @@ public class HelpNeedyFragment  extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        RecyclerView rv = root.findViewById(R.id.rv);
+        rv.setVisibility(View.INVISIBLE);
+        System.out.println("CLICK");
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.helpNeedyInfo,  new AddHelpNeedyFragment());
         Button addNeedyBtn = root.findViewById(R.id.addHelpNeedyBtn);

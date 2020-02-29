@@ -35,17 +35,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              ViewGroup container, Bundle savedInstanceState) {
 
         SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("CIVITATI_PREFERENCES", Context.MODE_PRIVATE);
-        root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        root = inflater.inflate(R.layout.fragment_home, container, false);
         if(mySharedPreferences.contains("CIVITATI_PREFERENCES")) {
-            root = inflater.inflate(R.layout.fragment_help_needy, container, false);
+            makeElementInVisible();
+            //root = inflater.inflate(R.layout.fragment_help_needy, container, false);
             mySharedPreferences.getString("CIVITATI_PREFERENCES", "");
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-            transaction.replace(R.id.helpNeedyInfo,  new HelpNeedyFragment());
+            transaction.replace(R.id.regHome,  new HelpNeedyFragment());
             transaction.commit();
         }
         else {
-            makeElementVisible();
             Button buttonReg = (Button)root.findViewById(R.id.enterRegBtn);
             final TextView enterPassword = root.findViewById(R.id.enterPassword);
             final TextView enterLogin = root.findViewById(R.id.enterLogin);
@@ -90,6 +90,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         buttonLogin.setVisibility(View.VISIBLE);
         logInfo.setVisibility(View.INVISIBLE);
         Log.i("Civitati", "Call makeElementVisible... ");
+    }
+
+    public void makeElementInVisible() {
+        final TextView enterPassword = root.findViewById(R.id.enterPassword);
+        final TextView enterLogin = root.findViewById(R.id.enterLogin);
+        final Button buttonLogin = root.findViewById(R.id.loginBtn);
+        final Button buttonRegFinal = (Button)root.findViewById(R.id.enterRegBtn);
+        final TextView logInfo = root.findViewById(R.id.loginInfo);
+        enterPassword.setVisibility(View.INVISIBLE);
+        enterLogin.setVisibility(View.INVISIBLE);
+        buttonRegFinal.setVisibility(View.INVISIBLE);
+        buttonLogin.setVisibility(View.INVISIBLE);
+        logInfo.setVisibility(View.INVISIBLE);
+        Log.i("Civitati", "Call makeElementInVisible... ");
     }
 
     public void onClick(View v) {
