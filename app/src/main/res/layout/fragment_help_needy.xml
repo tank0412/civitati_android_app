@@ -3,61 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <EditText
-        android:id="@+id/needyID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="60dp"
-        android:ems="10"
-        android:hint="NEEDY_ID"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/helpInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="HELP_INFO"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/needyID"
-        app:layout_constraintTop_toBottomOf="@+id/needyID" />
-
-    <EditText
-        android:id="@+id/helpDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="27dp"
-        android:ems="10"
-        android:hint="HELP_DATE"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/helpInfo"
-        app:layout_constraintTop_toBottomOf="@+id/helpInfo" />
+    android:layout_height="match_parent"
+    android:id="@+id/helpNeedyInfo"
+    >
 
     <Button
-        android:id="@+id/needyHelpBtn"
+        android:id="@+id/addHelpNeedyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="36dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="@+id/helpDate"
-        app:layout_constraintTop_toBottomOf="@+id/helpDate" />
-
-    <TextView
-        android:id="@+id/needyHelpAddInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/needyHelpBtn"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="1dp"
+        android:text="Add Help Needy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

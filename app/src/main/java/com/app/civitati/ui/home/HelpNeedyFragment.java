@@ -12,11 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.app.civitati.APIClient;
 import com.app.civitati.APIInterface;
 import com.app.civitati.R;
+import com.app.civitati.ui.dashboard.AddNeedyFragment;
 
 import java.io.IOException;
 
@@ -30,80 +32,17 @@ public class HelpNeedyFragment  extends Fragment implements View.OnClickListener
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_help_needy, container, false);
-        Button button = (Button)root.findViewById(R.id.needyHelpBtn);
+        Button button = (Button)root.findViewById(R.id.addHelpNeedyBtn);
         button.setOnClickListener(this);
         return root;
     }
+
     @Override
     public void onClick(View v) {
-        final TextView needyID = root.findViewById(R.id.needyID);
-        final TextView helpInfo = root.findViewById(R.id.helpInfo);
-        final TextView helpDate = root.findViewById(R.id.helpDate);
-        final TextView needyHelpAddInfo = root.findViewById(R.id.needyHelpAddInfo);
-
-        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-
-        Call<ResponseBody> helpNeedyCount = apiInterface.helpNeedyCount("SC" );
-        final APIInterface apiInterfaceF = apiInterface;
-        helpNeedyCount.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                String reponse = null;
-                try {
-                    reponse = response.body().string();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                int needyHelpCount = Integer.parseInt(reponse);
-                System.out.println(needyHelpCount);
-
-
-                String userNickName = null;
-                SharedPreferences mySharedPreferences = getActivity().getSharedPreferences("CIVITATI_PREFERENCES", Context.MODE_PRIVATE);
-                if(mySharedPreferences.contains("CIVITATI_PREFERENCES")) {
-                    userNickName = mySharedPreferences.getString("CIVITATI_PREFERENCES", "");
-                }
-                Call<ResponseBody> addHelpNeedy = apiInterfaceF.addHelpNeedy(needyHelpCount+1,userNickName, needyID.getText().toString(), helpInfo.getText().toString(), helpDate.getText().toString(), "I"  );
-                addHelpNeedy.enqueue(new Callback<ResponseBody>() {
-
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        String success = "New record created successfully";
-                        String reponse = null;
-                        try {
-                            reponse = response.body().string();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        if(success.equals(reponse)) {
-                            System.out.println("Add needy add success");
-                            Log.i("Civitati", "Success to add needy add. ");
-                            needyHelpAddInfo.setText("Needy help add success");
-                            needyHelpAddInfo.setVisibility(View.VISIBLE);
-                        }
-                        else {
-                            System.out.println("Add needy add fail");
-                            Log.i("Civitati", "Fail to add needy add. ");
-                            needyHelpAddInfo.setText("Needy help add fail");
-                            needyHelpAddInfo.setVisibility(View.VISIBLE);
-
-                        }
-                        System.out.println(reponse);
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                    }
-                });
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                //e.printStackTrace();
-                Log.i("Civitati", "FAIL to get count of Needy. Error" );
-            }
-        });
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.helpNeedyInfo,  new AddHelpNeedyFragment());
+        Button addNeedyBtn = root.findViewById(R.id.addHelpNeedyBtn);
+        addNeedyBtn.setVisibility(View.INVISIBLE);
+        transaction.commit();
     }
 }
