@@ -35,7 +35,7 @@ public class AddNeedyFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         final TextView needyName = root.findViewById(R.id.needyName);
-        final TextView helpReason = root.findViewById(R.id.helpReason);
+        final TextView helpReason = root.findViewById(R.id.needyID);
         final TextView needyAddress = root.findViewById(R.id.needyAddress);
         final TextView needyTelephone = root.findViewById(R.id.needyTelephone);
         final TextView needyAddInfo = root.findViewById(R.id.needyAddInfo);

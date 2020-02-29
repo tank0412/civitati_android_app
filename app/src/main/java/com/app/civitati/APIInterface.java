@@ -1,6 +1,7 @@
 package com.app.civitati;
 
 import com.app.civitati.ui.dashboard.Needy;
+import com.app.civitati.ui.home.NeedyHelp;
 
 import java.util.ArrayList;
 
@@ -35,4 +36,7 @@ public interface APIInterface {
 
     @GET("/helpneedy.php")
     Call<ResponseBody> helpNeedyCount(@Query("TYPE") String type );
+
+    @GET("/helpneedy.php")
+    Call<ArrayList<NeedyHelp>>getAllHelpNeediesInfoOfCurrentUser(@Query("ASSISTANT_NICKNAME") String assistantNickname, @Query("TYPE") String type );
 }

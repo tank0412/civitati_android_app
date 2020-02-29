@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/needyListRow"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools">
     <androidx.cardview.widget.CardView
         android:id="@+id/needyList"
         android:layout_width="0dp"
@@ -31,7 +28,7 @@
             android:textSize="36sp" />
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/needyID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="50dp"
@@ -39,7 +36,7 @@
             android:textSize="36sp" />
 
         <TextView
-            android:id="@+id/needyID"
+            android:id="@+id/helpInfo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="100dp"
@@ -47,7 +44,7 @@
             android:textSize="36sp" />
 
         <TextView
-            android:id="@+id/helpInfo"
+            android:id="@+id/helpDate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="150dp"
@@ -55,20 +52,11 @@
             android:textSize="36sp" />
 
         <TextView
-            android:id="@+id/helpDate"
+            android:id="@+id/submitDate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="200dp"
             android:gravity="center_vertical|center_horizontal|top"
-            android:textSize="36sp" />
-
-        <TextView
-            android:id="@+id/submitDate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="300dp"
-            android:gravity="center_vertical|center_horizontal|top"
-            android:hint="Date"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

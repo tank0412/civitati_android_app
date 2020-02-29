@@ -1,4 +1,4 @@
-package com.app.civitati.ui.dashboard;
+package com.app.civitati.ui.home;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,40 +17,47 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
-    List<Needy> needies;
-    NAdapter(List<Needy> needies){
+public class NHAdapter extends RecyclerView.Adapter<NHAdapter.NeedyViewHolder>{
+    List<NeedyHelp> needies;
+    NHAdapter(List<NeedyHelp> needies){
         this.needies = needies;
     }
 
     @NonNull
     @Override
     public NeedyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.needy_list_row, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.needy_help_list_row, viewGroup, false);
         NeedyViewHolder nvh = new NeedyViewHolder(v);
         return nvh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull NeedyViewHolder holder, int position) {
-        holder.needyId.setText("ID: " + needies.get(position).getId().toString());
-        holder.needyName.setText("Name: " + needies.get(position).getName());
-        holder.needyHelpReason.setText("Help Reason: " + needies.get(position).getHelpReason());
-        holder.needyAddress.setText("Address: " + needies.get(position).getAdress());
-        holder.needyTelephone.setText("Telephone: " + (CharSequence) needies.get(position).getTelephone().toString());
+        holder.needyHelpId.setText("Help ID: " + needies.get(position).getId().toString());
+        holder.needyId.setText("Needy ID: " + needies.get(position).getNeedyID());
+        holder.helpInfo.setText("Help info: " + needies.get(position).getHelpInfo());
 
         SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
                 Locale.ENGLISH);
         Date parsedDate = null;
         try {
-            parsedDate = sdf.parse(needies.get(position).getSubmitDate().toString());
+            parsedDate = sdf.parse(needies.get(position).getHelpDate().toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         SimpleDateFormat print = new SimpleDateFormat("dd-MM-yy");
         //System.out.println(print.format(parsedDate));
         //System.out.println(parsedDate.toString());
-        holder.needyDate.setText("Date: " + print.format(parsedDate));
+        holder.helpDate.setText("Help Date: " + print.format(parsedDate));
+
+        try {
+            parsedDate = sdf.parse(needies.get(position).getSubmitDate().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //System.out.println(print.format(parsedDate));
+        //System.out.println(parsedDate.toString());
+        holder.submitDate.setText("Submit Date: " + print.format(parsedDate));
     }
 
     @Override
@@ -66,20 +73,20 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
     public static class NeedyViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView needyId;
-        TextView needyName;
-        TextView needyHelpReason;
-        TextView needyAddress;
-        TextView needyTelephone;
-        TextView needyDate;
+        TextView needyHelpId;
+        TextView assistantNickname;
+        TextView helpInfo;
+        TextView helpDate;
+        TextView submitDate;
         NeedyViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.needyList);
-            needyId = (TextView)itemView.findViewById(R.id.id);
-            needyName = (TextView)itemView.findViewById(R.id.name);
-            needyHelpReason = (TextView)itemView.findViewById(R.id.needyID);
-            needyAddress = (TextView)itemView.findViewById(R.id.helpInfo);
-            needyTelephone = (TextView)itemView.findViewById(R.id.helpDate);
-            needyDate = (TextView)itemView.findViewById(R.id.submitDate);
+            needyHelpId = (TextView)itemView.findViewById(R.id.id);
+            needyId = (TextView)itemView.findViewById(R.id.needyID);
+            assistantNickname = (TextView)itemView.findViewById(R.id.name);
+            helpInfo = (TextView)itemView.findViewById(R.id.helpInfo);
+            helpDate = (TextView)itemView.findViewById(R.id.helpDate);
+            submitDate = (TextView)itemView.findViewById(R.id.submitDate);
         }
     }
 }
