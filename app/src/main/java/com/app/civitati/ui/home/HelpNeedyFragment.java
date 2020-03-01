@@ -8,26 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.civitati.APIClient;
 import com.app.civitati.APIInterface;
 import com.app.civitati.R;
-import com.app.civitati.ui.dashboard.AddNeedyFragment;
-import com.app.civitati.ui.dashboard.NAdapter;
-import com.app.civitati.ui.dashboard.Needy;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,10 +42,9 @@ public class HelpNeedyFragment  extends Fragment implements View.OnClickListener
         rv.setLayoutManager(llm);
         needyHelpArrayList = new ArrayList<NeedyHelp>();
 
-        adapter = new NHAdapter(needyHelpArrayList );
+        adapter = new NHAdapter(needyHelpArrayList, getContext() );
         rv.setAdapter(adapter);
         getAllNeediesHelp();
-
         return root;
     }
 

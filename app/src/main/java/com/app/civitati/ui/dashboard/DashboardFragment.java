@@ -61,7 +61,7 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         needyArrayList.add(needy);
          */
 
-        adapter = new NAdapter(needyArrayList );
+        adapter = new NAdapter(needyArrayList, getContext() );
         rv.setAdapter(adapter);
         getAllNeedies();
         return root;
