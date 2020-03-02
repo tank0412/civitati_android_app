@@ -1,6 +1,7 @@
 package com.app.civitati.ui.dashboard;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,14 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.civitati.APIClient;
+import com.app.civitati.APIInterface;
 import com.app.civitati.R;
 import com.app.civitati.ui.home.NHAdapter;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
     List<Needy> needies;
@@ -61,6 +70,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
         holder.needyDate.setText("Date: " + print.format(parsedDate));
 
         final NAdapter.NeedyViewHolder holderF = holder;
+        final int positionF = position;
         holder.iv_menu.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -75,7 +85,35 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.delete:
-                                Toast.makeText(context,"You Clicked delete ", Toast.LENGTH_SHORT).show();
+                                APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+                                Call<ResponseBody> tryToDelete = apiInterface.deleteNRow(needies.get(positionF).getId() , "DR" );
+                                tryToDelete.enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        String success = "Record was deleted successfully";
+                                        String reponseString = null;
+                                        try {
+                                            reponseString = response.body().string();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        System.out.println(reponseString);
+                                        Log.i("Civitati",  reponseString );
+                                        if(success.equals(reponseString)) {
+                                            Log.i("Civitati", "Success to delete row. ");
+                                            Toast.makeText(context,"Record was successfully deleted", Toast.LENGTH_SHORT).show();
+                                            needies.remove(positionF);
+                                            notifyDataSetChanged();
+                                        }
+                                        else {
+                                            Toast.makeText(context,"Error: Record was not deleted", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                        Log.i("Civitati", "Error: Record was not deleted" );
+                                    }
+                                });
                                 break;
                             case R.id.update:
                                 Toast.makeText(context,"You Clicked update ", Toast.LENGTH_SHORT).show();

@@ -41,5 +41,8 @@ public interface APIInterface {
     Call<ArrayList<NeedyHelp>>getAllHelpNeediesInfoOfCurrentUser(@Query("ASSISTANT_NICKNAME") String assistantNickname, @Query("TYPE") String type );
 
     @GET("/helpneedy.php")
-    Call<ResponseBody> deleteRow(@Query("ID") int id, @Query("ASSISTANT_NICKNAME") String assistantNickname, @Query("TYPE") String type );
+    Call<ResponseBody> deleteHNRow(@Query("ID") int id, @Query("ASSISTANT_NICKNAME") String assistantNickname, @Query("TYPE") String type );
+
+    @GET("/needy.php")
+    Call<ResponseBody> deleteNRow(@Query("ID") int id,  @Query("TYPE") String type );
 }

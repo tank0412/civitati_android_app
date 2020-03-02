@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.civitati.APIClient;
@@ -101,7 +99,7 @@ public class NHAdapter extends RecyclerView.Adapter<NHAdapter.NeedyViewHolder>{
                         switch (item.getItemId()) {
                             case R.id.delete:
                                 APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-                                Call<ResponseBody> tryToDelete = apiInterface.deleteRow(needies.get(positionF).getId(), userNickNameF, "DR" );
+                                Call<ResponseBody> tryToDelete = apiInterface.deleteHNRow(needies.get(positionF).getId(), userNickNameF, "DR" );
                                 tryToDelete.enqueue(new Callback<ResponseBody>() {
                                     @Override
                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
