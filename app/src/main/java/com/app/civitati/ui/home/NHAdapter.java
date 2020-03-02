@@ -1,10 +1,13 @@
 package com.app.civitati.ui.home;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -12,15 +15,24 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.civitati.APIClient;
+import com.app.civitati.APIInterface;
 import com.app.civitati.R;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NHAdapter extends RecyclerView.Adapter<NHAdapter.NeedyViewHolder>{
     List<NeedyHelp> needies;
@@ -39,7 +51,7 @@ public class NHAdapter extends RecyclerView.Adapter<NHAdapter.NeedyViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NeedyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NeedyViewHolder holder, final int position) {
         holder.needyHelpId.setText("Help ID: " + needies.get(position).getId().toString());
         holder.needyId.setText("Needy ID: " + needies.get(position).getNeedyID());
         holder.helpInfo.setText("Help info: " + needies.get(position).getHelpInfo());
@@ -76,12 +88,47 @@ public class NHAdapter extends RecyclerView.Adapter<NHAdapter.NeedyViewHolder>{
                 //Inflating the Popup using xml file
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
 
+                String userNickName = null;
+                SharedPreferences mySharedPreferences = context.getSharedPreferences("CIVITATI_PREFERENCES", Context.MODE_PRIVATE);
+                if(mySharedPreferences.contains("CIVITATI_PREFERENCES")) {
+                    userNickName = mySharedPreferences.getString("CIVITATI_PREFERENCES", "");
+                }
+                final String userNickNameF = userNickName;
+                final int positionF = position;
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.delete:
-                                Toast.makeText(context,"You Clicked delete ", Toast.LENGTH_SHORT).show();
+                                APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+                                Call<ResponseBody> tryToDelete = apiInterface.deleteRow(needies.get(positionF).getId(), userNickNameF, "DR" );
+                                tryToDelete.enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        String success = "Record was deleted successfully";
+                                        String reponseString = null;
+                                        try {
+                                            reponseString = response.body().string();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        System.out.println(reponseString);
+                                        Log.i("Civitati",  reponseString );
+                                        if(success.equals(reponseString)) {
+                                            Log.i("Civitati", "Success to delete row. ");
+                                            Toast.makeText(context,"Record was successfully deleted", Toast.LENGTH_SHORT).show();
+                                            needies.remove(positionF);
+                                            notifyDataSetChanged();
+                                        }
+                                        else {
+                                            Toast.makeText(context,"Error: Record was not deleted", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                        Log.i("Civitati", "Error: Record was not deleted" );
+                                    }
+                                });
                                 break;
                             case R.id.update:
                                 Toast.makeText(context,"You Clicked update ", Toast.LENGTH_SHORT).show();

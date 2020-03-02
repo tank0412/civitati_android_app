@@ -28,7 +28,6 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private HomeViewModel homeViewModel;
     private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
