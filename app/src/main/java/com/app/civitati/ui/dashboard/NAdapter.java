@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.civitati.APIClient;
@@ -35,9 +37,13 @@ import retrofit2.Response;
 public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
     List<Needy> needies;
     Context context;
-    NAdapter(List<Needy> needies, Context context){
+    FragmentManager fragmentManager;
+    View helpNeedyView;
+    NAdapter(List<Needy> needies, Context context, FragmentManager fragmentManager, View helpNeedyView){
         this.needies = needies;
         this.context = context;
+        this.fragmentManager = fragmentManager;
+        this.helpNeedyView = helpNeedyView;
     }
 
     @NonNull
@@ -67,7 +73,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
         SimpleDateFormat print = new SimpleDateFormat("dd-MM-yy");
         //System.out.println(print.format(parsedDate));
         //System.out.println(parsedDate.toString());
-        holder.needyDate.setText("Date: " + print.format(parsedDate));
+        holder.needyDate.setText("Submit date: " + print.format(parsedDate));
 
         final NAdapter.NeedyViewHolder holderF = holder;
         final int positionF = position;
@@ -116,6 +122,11 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
                                 });
                                 break;
                             case R.id.update:
+                                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                transaction.replace(R.id.dashboard,  new UpdateNeedyFragment(needies.get(positionF), context));
+                                helpNeedyView.findViewById(R.id.addNeedyBtn).setVisibility(View.INVISIBLE);
+                                helpNeedyView.findViewById(R.id.rv).setVisibility(View.INVISIBLE);
+                                transaction.commit();
                                 Toast.makeText(context,"You Clicked update ", Toast.LENGTH_SHORT).show();
                                 break;
                         }
