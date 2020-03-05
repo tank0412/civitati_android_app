@@ -45,4 +45,7 @@ public interface APIInterface {
 
     @GET("/needy.php")
     Call<ResponseBody> deleteNRow(@Query("ID") int id,  @Query("TYPE") String type );
+
+    @GET("/helpneedy.php")
+    Call<ResponseBody> updateHelpNeedy(@Query("ID") int id, @Query("NEEDY_ID") String needyId, @Query("HELP_INFO") String helpInfo, @Query("HELP_DATE") String helpDate, @Query("TYPE") String type );
 }

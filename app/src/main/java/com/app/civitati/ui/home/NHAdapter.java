@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.civitati.APIClient;
@@ -35,9 +38,13 @@ import retrofit2.Response;
 public class NHAdapter extends RecyclerView.Adapter<NHAdapter.NeedyViewHolder>{
     List<NeedyHelp> needies;
     Context context;
-    NHAdapter(List<NeedyHelp> needies,  Context context){
+    FragmentManager fragmentManager;
+    View helpNeedyView;
+    NHAdapter(List<NeedyHelp> needies, Context context, FragmentManager fragmentManager, View helpNeedyView){
         this.needies = needies;
         this.context = context;
+        this.fragmentManager = fragmentManager;
+        this.helpNeedyView = helpNeedyView;
     }
 
     @NonNull
@@ -129,6 +136,11 @@ public class NHAdapter extends RecyclerView.Adapter<NHAdapter.NeedyViewHolder>{
                                 });
                                 break;
                             case R.id.update:
+                                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                transaction.replace(R.id.helpNeedyInfo,  new UpdateHelpNeedyFragment(needies.get(positionF), context));
+                                helpNeedyView.findViewById(R.id.addHelpNeedyBtn).setVisibility(View.INVISIBLE);
+                                helpNeedyView.findViewById(R.id.rv).setVisibility(View.INVISIBLE);
+                                transaction.commit();
                                 Toast.makeText(context,"You Clicked update ", Toast.LENGTH_SHORT).show();
                                 break;
                         }

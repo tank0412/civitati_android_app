@@ -42,7 +42,7 @@ public class HelpNeedyFragment  extends Fragment implements View.OnClickListener
         rv.setLayoutManager(llm);
         needyHelpArrayList = new ArrayList<NeedyHelp>();
 
-        adapter = new NHAdapter(needyHelpArrayList, getContext() );
+        adapter = new NHAdapter(needyHelpArrayList, getContext(), getChildFragmentManager(), root );
         rv.setAdapter(adapter);
         getAllNeediesHelp();
         return root;
