@@ -55,4 +55,7 @@ public interface APIInterface {
 
     @GET("/notifications.php")
     Call<ArrayList<Notification>> getNotificationsForCurrentUser(@Query("USER_NICKNAME") String USER_NICKNAME, @Query("TYPE") String type );
+
+    @GET("/notifications.php")
+    Call<ResponseBody> deleteNotifRow(@Query("ID") int id, @Query("USER_NICKNAME") String USER_NICKNAME,  @Query("TYPE") String type );
 }

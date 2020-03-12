@@ -1,6 +1,7 @@
 package com.app.civitati.ui.notifications;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -87,7 +88,42 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.Notification
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(context,"You clicked delete", Toast.LENGTH_SHORT).show();
+                        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+
+                        String userNickName = null;
+                        SharedPreferences mySharedPreferences = context.getSharedPreferences("CIVITATI_PREFERENCES", Context.MODE_PRIVATE);
+                        if(mySharedPreferences.contains("CIVITATI_PREFERENCES")) {
+                            userNickName = mySharedPreferences.getString("CIVITATI_PREFERENCES", "");
+                        }
+
+                        Call<ResponseBody> tryToDelete = apiInterface.deleteNotifRow(notifications.get(positionF).getId() , userNickName, "DR" );
+                        tryToDelete.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                String success = "Record was deleted successfully";
+                                String reponseString = null;
+                                try {
+                                    reponseString = response.body().string();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                System.out.println(reponseString);
+                                Log.i("Civitati",  reponseString );
+                                if(success.equals(reponseString)) {
+                                    Log.i("Civitati", "Success to delete row. ");
+                                    Toast.makeText(context,"Record was successfully deleted", Toast.LENGTH_SHORT).show();
+                                    notifications.remove(positionF);
+                                    notifyDataSetChanged();
+                                }
+                                else {
+                                    Toast.makeText(context,"Error: Record was not deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.i("Civitati", "Error: Record was not deleted" );
+                            }
+                        });
                         return true;
                     }
                 });
