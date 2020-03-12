@@ -2,6 +2,7 @@ package com.app.civitati;
 
 import com.app.civitati.ui.dashboard.Needy;
 import com.app.civitati.ui.home.NeedyHelp;
+import com.app.civitati.ui.notifications.Notification;
 
 import java.util.ArrayList;
 
@@ -51,4 +52,7 @@ public interface APIInterface {
 
     @GET("/needy.php")
     Call<ResponseBody> updNeedy(@Query("ID") int id, @Query("NAME") String name, @Query("HELP_REASON") String reason, @Query("ADDRESS") String address, @Query("TELEPHONE") String telephone, @Query("TYPE") String type );
+
+    @GET("/notifications.php")
+    Call<ArrayList<Notification>> getNotificationsForCurrentUser(@Query("USER_NICKNAME") String USER_NICKNAME, @Query("TYPE") String type );
 }
