@@ -4,15 +4,17 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/needyList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:longClickable="true"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         card_view:cardCornerRadius="4dp"
@@ -74,9 +76,8 @@
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="parent"
-            app:srcCompat="@drawable/ic_more_vert_black"
             app:showAsAction="always"
-            />
+            app:srcCompat="@drawable/ic_more_vert_black" />
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
