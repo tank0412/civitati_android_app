@@ -1,6 +1,31 @@
 <resources>
     <string name="app_name">Civitati</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Посещения</string>
+    <string name="title_dashboard">Нуждающиеся</string>
+    <string name="title_notifications">Уведомления</string>
+    <string name="btn_submit">Добавить</string>
+    <string name="btn_login">Войти</string>
+    <string name="btn_reg">Регистрация</string>
+    <string name="btn_upd">Обновить</string>
+    <string name="btn_del">Удалить</string>
+    <string name="hint_date">Дата</string>
+    <string name="info_id">ИД:</string>
+    <string name="info_name">Имя:</string>
+    <string name="info_help_reason">Почему нуждается:</string>
+    <string name="info_address">Адрес:</string>
+    <string name="info_telephone">Телефон:</string>
+    <string name="info_submit_date">Дата добавления:</string>
+    <string name="report_delete_success">Запись успешно удалена</string>
+    <string name="report_add_success">Запись успешно добавлена</string>
+    <string name="report_update_success">Запись успешно добавлена</string>
+    <string name="report_update_fail">Ошибка при добавлении записи</string>
+    <string name="report_delete_fail">Ошибка при удалении записи</string>
+    <string name="report_add_fail">Ошибка при добавлении записи</string>
+    <string name="report_update_prepare">Подготовка к изменению</string>
+    <string name="info_id_needy">ИД нуждающегося:</string>
+    <string name="info_help_needy">Информация о помощи:</string>
+    <string name="info_needy_help_date">Дата помощи:</string>
+    <string name="info_id_needy_help">ИД помощи нуждающемуся:</string>
+    <string name="info_notification_date">Дата уведомления:</string>
+    <string name="info_needy_name">ФИО:</string>
 </resources>

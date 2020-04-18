@@ -58,8 +58,8 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.Notification
 
     @Override
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-        holder.notificationId.setText("ID: " + notifications.get(position).getId().toString());
-        holder.NEEDY_HELP_ID.setText("Needy Help ID: " + notifications.get(position).getNEEDY_HELP_ID());
+        holder.notificationId.setText(context.getString(R.string.info_id)  + notifications.get(position).getId().toString());
+        holder.NEEDY_HELP_ID.setText(context.getString(R.string.info_id_needy_help) + notifications.get(position).getNEEDY_HELP_ID());
 
         SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
                 Locale.ENGLISH);
@@ -72,7 +72,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.Notification
         SimpleDateFormat print = new SimpleDateFormat("dd-MM-yy");
         //System.out.println(print.format(parsedDate));
         //System.out.println(parsedDate.toString());
-        holder.NOTIFICATION_DATE.setText("Notification date: " + print.format(parsedDate));
+        holder.NOTIFICATION_DATE.setText(context.getString(R.string.info_notification_date)  + print.format(parsedDate));
 
         final NotificationViewHolder holderF = holder;
         final int positionF = position;
@@ -111,12 +111,12 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.Notification
                                 Log.i("Civitati",  reponseString );
                                 if(success.equals(reponseString)) {
                                     Log.i("Civitati", "Success to delete row. ");
-                                    Toast.makeText(context,"Record was successfully deleted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,context.getString(R.string.report_delete_success), Toast.LENGTH_SHORT).show();
                                     notifications.remove(positionF);
                                     notifyDataSetChanged();
                                 }
                                 else {
-                                    Toast.makeText(context,"Error: Record was not deleted", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context,context.getString(R.string.report_delete_fail), Toast.LENGTH_SHORT).show();
                                 }
                             }
                             @Override

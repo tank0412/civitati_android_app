@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="9dp"
-        android:text="Add Help Needy"
+        android:text="@string/btn_submit"
         app:layout_constraintBottom_toTopOf="@+id/rv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

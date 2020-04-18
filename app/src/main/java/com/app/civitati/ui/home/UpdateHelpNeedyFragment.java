@@ -101,7 +101,7 @@ public class UpdateHelpNeedyFragment extends Fragment implements View.OnClickLis
                 Log.i("Civitati",  reponseString );
                 if(success.equals(reponseString)) {
                     Log.i("Civitati", "Success to update row. ");
-                    Toast.makeText(context,"Record was successfully updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getContext().getString(R.string.report_update_success), Toast.LENGTH_SHORT).show();
 
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
@@ -115,7 +115,7 @@ public class UpdateHelpNeedyFragment extends Fragment implements View.OnClickLis
                     transaction.commit();
                 }
                 else {
-                    Toast.makeText(context,"Error: Record was not updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getContext().getString(R.string.report_update_fail), Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

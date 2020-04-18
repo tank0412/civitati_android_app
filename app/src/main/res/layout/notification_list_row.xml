@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
             android:gravity="center_vertical|center_horizontal|top"
-            android:hint="Date"
+            android:hint="@string/hint_date"
             android:textSize="18sp" />
 
         <ImageView

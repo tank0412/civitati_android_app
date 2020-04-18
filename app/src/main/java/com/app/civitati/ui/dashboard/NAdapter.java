@@ -56,11 +56,11 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull NeedyViewHolder holder, int position) {
-        holder.needyId.setText("ID: " + needies.get(position).getId().toString());
-        holder.needyName.setText("Name: " + needies.get(position).getName());
-        holder.needyHelpReason.setText("Help Reason: " + needies.get(position).getHelpReason());
-        holder.needyAddress.setText("Address: " + needies.get(position).getAdress());
-        holder.needyTelephone.setText("Telephone: " + (CharSequence) needies.get(position).getTelephone().toString());
+        holder.needyId.setText(context.getString(R.string.info_id) + needies.get(position).getId().toString());
+        holder.needyName.setText(context.getString(R.string.info_name) + needies.get(position).getName());
+        holder.needyHelpReason.setText(context.getString(R.string.info_help_reason) + needies.get(position).getHelpReason());
+        holder.needyAddress.setText(context.getString(R.string.info_address)+ needies.get(position).getAdress());
+        holder.needyTelephone.setText(context.getString(R.string.info_telephone) + (CharSequence) needies.get(position).getTelephone().toString());
 
         SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy",
                 Locale.ENGLISH);
@@ -73,7 +73,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
         SimpleDateFormat print = new SimpleDateFormat("dd-MM-yy");
         //System.out.println(print.format(parsedDate));
         //System.out.println(parsedDate.toString());
-        holder.needyDate.setText("Submit date: " + print.format(parsedDate));
+        holder.needyDate.setText(context.getString(R.string.info_submit_date) + print.format(parsedDate));
 
         final NAdapter.NeedyViewHolder holderF = holder;
         final int positionF = position;
@@ -107,12 +107,12 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
                                         Log.i("Civitati",  reponseString );
                                         if(success.equals(reponseString)) {
                                             Log.i("Civitati", "Success to delete row. ");
-                                            Toast.makeText(context,"Record was successfully deleted", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context,context.getString(R.string.report_delete_success), Toast.LENGTH_SHORT).show();
                                             needies.remove(positionF);
                                             notifyDataSetChanged();
                                         }
                                         else {
-                                            Toast.makeText(context,"Error: Record was not deleted", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context,context.getString(R.string.report_delete_fail), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                     @Override
@@ -127,7 +127,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
                                 helpNeedyView.findViewById(R.id.addNeedyBtn).setVisibility(View.INVISIBLE);
                                 helpNeedyView.findViewById(R.id.rv).setVisibility(View.INVISIBLE);
                                 transaction.commit();
-                                Toast.makeText(context,"You Clicked update ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context,context.getString(R.string.report_update_prepare), Toast.LENGTH_SHORT).show();
                                 break;
                         }
                         return true;

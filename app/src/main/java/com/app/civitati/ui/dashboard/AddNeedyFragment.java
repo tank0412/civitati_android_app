@@ -60,13 +60,13 @@ public class AddNeedyFragment extends Fragment implements View.OnClickListener {
                                 if(success.equals(reponse)) {
                                     System.out.println("Add needy success");
                                     Log.i("Civitati", "Success to add needy. ");
-                                    needyAddInfo.setText("Needy add success");
+                                    needyAddInfo.setText(getContext().getString(R.string.report_add_success));
                                     needyAddInfo.setVisibility(View.VISIBLE);
                                 }
                                 else {
                                     System.out.println("Add needy fail");
                                     Log.i("Civitati", "Fail to add needy. ");
-                                    needyAddInfo.setText("Needy add fail");
+                                    needyAddInfo.setText(getContext().getString(R.string.report_add_fail));
                                     needyAddInfo.setVisibility(View.VISIBLE);
 
                                 }
