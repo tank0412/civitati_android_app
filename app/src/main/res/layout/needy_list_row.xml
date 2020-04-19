@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/needyList"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -89,6 +89,6 @@
             app:showAsAction="always"
             app:srcCompat="@drawable/ic_more_vert_black" />
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
