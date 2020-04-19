@@ -30,4 +30,7 @@
     <string name="info_needy_name">ФИО:</string>
     <string name="info_login_enter">Логин</string>
     <string name="info_password">Пароль</string>
+    <string name="info_logout_option">Выход из системы</string>
+    <string name="report_logout">Выходим из системы....</string>
+    <string name="report_logout_fail">Ошибка при выходе из системы</string>
 </resources>

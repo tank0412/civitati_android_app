@@ -1,6 +1,12 @@
 package com.app.civitati;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,6 +31,41 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        SharedPreferences mySharedPreferences = getSharedPreferences("CIVITATI_PREFERENCES", Context.MODE_PRIVATE);
+        if(mySharedPreferences.contains("CIVITATI_PREFERENCES")) {
+            getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu1: {
+                SharedPreferences mySharedPreferences = getSharedPreferences("CIVITATI_PREFERENCES", Context.MODE_PRIVATE);
+                if(mySharedPreferences.contains("CIVITATI_PREFERENCES")) {
+                    mySharedPreferences.edit().clear().commit();
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent); //restarting an activity
+                    Toast.makeText(this, getString(R.string.report_logout), Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(this, getString(R.string.report_logout_fail), Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

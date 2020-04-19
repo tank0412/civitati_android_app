@@ -136,19 +136,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
                         //Log.i("Civitati", response.body().string());
 
-                        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-                        transaction.replace(R.id.regHome,  new HelpNeedyFragment());
-                        //transaction.addToBackStack(null); // TODO: Исправить баг: при нажатии на кнопку Назад, вернет к пред фрагменту, где будет скрыт layout
-
-                        enterPassword.setVisibility(View.INVISIBLE);
-                        enterLogin.setVisibility(View.INVISIBLE);
-                        logInfo.setVisibility(View.INVISIBLE);
-                        buttonRegFinal.setVisibility(View.INVISIBLE);
-                        buttonLogin.setVisibility(View.INVISIBLE);
-
-
-                        transaction.commit();
-
+                        getActivity().recreate();
 
                     }
                     if(fail.equals(reposne)) {
