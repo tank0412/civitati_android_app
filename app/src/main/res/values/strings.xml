@@ -28,4 +28,6 @@
     <string name="info_id_needy_help">ИД помощи нуждающемуся:</string>
     <string name="info_notification_date">Дата уведомления:</string>
     <string name="info_needy_name">ФИО:</string>
+    <string name="info_login_enter">Логин</string>
+    <string name="info_password">Пароль</string>
 </resources>
