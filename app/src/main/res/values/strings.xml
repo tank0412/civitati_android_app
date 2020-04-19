@@ -7,6 +7,7 @@
     <string name="btn_login">Войти</string>
     <string name="btn_reg">Регистрация</string>
     <string name="btn_upd">Обновить</string>
+    <string name="btn_upload_photo">Загрузить фото</string>
     <string name="btn_del">Удалить</string>
     <string name="hint_date">Дата</string>
     <string name="info_id">ИД:</string>

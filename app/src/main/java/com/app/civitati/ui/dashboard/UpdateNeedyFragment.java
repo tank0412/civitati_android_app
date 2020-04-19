@@ -1,16 +1,25 @@
 package com.app.civitati.ui.dashboard;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -30,12 +39,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class UpdateNeedyFragment extends Fragment implements View.OnClickListener {
     View root;
     TextView needyName;
     TextView helpReason;
     TextView needyAddress;
     TextView needyTelephone;
+    ImageView userAvatar;
 
     public Needy needies;
     Context context;
@@ -53,6 +65,7 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
         helpReason = (TextView)root.findViewById(R.id.helpReason);
         needyAddress = (TextView)root.findViewById(R.id.needyAddress);
         needyTelephone = (TextView)root.findViewById(R.id.needyTelephone);
+        userAvatar = (ImageView) root.findViewById(R.id.userAvatar);
 
         needyName.setText(needies.getName());
         helpReason.setText(needies.getHelpReason());
@@ -62,7 +75,52 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
         Button btn = root.findViewById(R.id.needyHelpBtn);
         btn.setOnClickListener(this);
 
+        Button btnPhoto = root.findViewById(R.id.uploadImageBtn);
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ActivityCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                {
+                    requestPermissions(
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            2000);
+                }
+                else {
+                    startGallery();
+                }
+            }
+            }
+        );
+
         return root;
+    }
+
+    private void startGallery() {
+        Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        cameraIntent.setType("image/*");
+        if (cameraIntent.resolveActivity(context.getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, 1000);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super method removed
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1000) {
+                Uri returnUri = data.getData();
+                Bitmap bitmapImage = null;
+                try {
+                    bitmapImage = MediaStore.Images.Media.getBitmap(context.getContentResolver(), returnUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                userAvatar.setImageBitmap(bitmapImage);
+            }
+        }
+        //Uri returnUri;
+        //returnUri = data.getData();
     }
 
     @Override
