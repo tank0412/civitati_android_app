@@ -27,6 +27,7 @@ import com.app.civitati.APIClient;
 import com.app.civitati.APIInterface;
 import com.app.civitati.R;
 import com.app.civitati.ui.home.uploadImage;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,6 +71,11 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
         helpReason.setText(needies.getHelpReason());
         needyAddress.setText(needies.getAdress());
         needyTelephone.setText(needies.getTelephone().toString());
+
+        userAvatarFileName = needies.getImage();
+        String baseAvatarURL = "https://civitati.000webhostapp.com/";
+        Log.i("Civitati", baseAvatarURL + needies.getImage());
+        Picasso.get().load(baseAvatarURL + needies.getImage() ).into(userAvatar);
 
         Button btn = root.findViewById(R.id.needySubmitBtn);
         btn.setOnClickListener(this);
