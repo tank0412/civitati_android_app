@@ -2,17 +2,22 @@ package com.app.civitati;
 
 import com.app.civitati.ui.dashboard.Needy;
 import com.app.civitati.ui.home.NeedyHelp;
+import com.app.civitati.ui.home.ServerResponse;
 import com.app.civitati.ui.notifications.Notification;
 
 import java.util.ArrayList;
+import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 public interface APIInterface {
@@ -58,4 +63,18 @@ public interface APIInterface {
 
     @GET("/notifications.php")
     Call<ResponseBody> deleteNotifRow(@Query("ID") int id, @Query("USER_NICKNAME") String USER_NICKNAME,  @Query("TYPE") String type );
+
+    @Multipart
+    @POST("upload.php")
+    Call<ResponseBody> updateProfile(@Part MultipartBody.Part image);
+
+    @POST("upload.php")
+    Call<ResponseBody> profileImage(@Body RequestBody body);
+
+    @Multipart
+    @POST("upload.php")
+    Call<ServerResponse> upload(
+            @PartMap Map<String, RequestBody> map
+    );
+
 }

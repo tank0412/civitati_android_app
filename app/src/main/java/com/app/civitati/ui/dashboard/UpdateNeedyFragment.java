@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,20 +20,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.app.civitati.APIClient;
 import com.app.civitati.APIInterface;
 import com.app.civitati.R;
+import com.app.civitati.ui.home.uploadImage;
 
+import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -110,23 +107,47 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
         if (resultCode == RESULT_OK) {
             if (requestCode == 1000) {
                 Uri returnUri = data.getData();
+                String picturePath = getPath( getActivity( ).getApplicationContext( ), returnUri );
+                Log.d("Picture Path", picturePath);
+                Uri returnUri2 = Uri.fromFile(new File(picturePath));
                 Bitmap bitmapImage = null;
                 try {
-                    bitmapImage = MediaStore.Images.Media.getBitmap(context.getContentResolver(), returnUri);
+                    bitmapImage = MediaStore.Images.Media.getBitmap(context.getContentResolver(), returnUri2);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
                 userAvatar.setImageBitmap(bitmapImage);
+
+                uploadImage uploadImages = new uploadImage(context, picturePath);
+                uploadImages.execute();
+
             }
         }
         //Uri returnUri;
         //returnUri = data.getData();
     }
 
+    public static String getPath( Context context, Uri uri ) {
+        String result = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver( ).query( uri, proj, null, null, null );
+        if(cursor != null){
+            if ( cursor.moveToFirst( ) ) {
+                int column_index = cursor.getColumnIndexOrThrow( proj[0] );
+                result = cursor.getString( column_index );
+            }
+            cursor.close( );
+        }
+        if(result == null) {
+            result = "Not found";
+        }
+        return result;
+    }
+
     @Override
     public void onClick(View v) {
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-
 
         Call<ResponseBody> tryToDelete = apiInterface.updNeedy(needies.getId(), needyName.getText().toString(), helpReason.getText().toString(), needyAddress.getText().toString(),needyTelephone.getText().toString(), "UR" );
         tryToDelete.enqueue(new Callback<ResponseBody>() {
@@ -149,10 +170,13 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
 
                     Button btn = root.findViewById(R.id.needyHelpBtn);
                     btn.setVisibility(View.INVISIBLE);
+                    Button btn2 = root.findViewById(R.id.uploadImageBtn);
+                    btn2.setVisibility(View.INVISIBLE);
                     needyName.setVisibility(View.INVISIBLE);
                     helpReason.setVisibility(View.INVISIBLE);
                     needyAddress.setVisibility(View.INVISIBLE);
                     needyTelephone.setVisibility(View.INVISIBLE);
+                    userAvatar.setVisibility(View.INVISIBLE);
 
                     transaction.replace(R.id.NeedyUpd,  new DashboardFragment());
                     transaction.commit();
