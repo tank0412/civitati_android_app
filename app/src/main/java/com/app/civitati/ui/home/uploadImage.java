@@ -66,20 +66,6 @@ public class uploadImage extends AsyncTask<Void, Void, Void> {
                 Toast.makeText(context, "Fail" + t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-
-                /*
-                Call<ResponseBody> tryToDelete = apiInterface.updateProfile(body);
-                tryToDelete.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Log.i("Civitati", "Success upload image to server" );
-                    }
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Log.i("Civitati", "Error: Can not upload image to server" );
-                    }
-                                        });
-                 */
         return null;
     }
     @Override

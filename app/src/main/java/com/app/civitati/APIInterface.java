@@ -66,13 +66,6 @@ public interface APIInterface {
 
     @Multipart
     @POST("upload.php")
-    Call<ResponseBody> updateProfile(@Part MultipartBody.Part image);
-
-    @POST("upload.php")
-    Call<ResponseBody> profileImage(@Body RequestBody body);
-
-    @Multipart
-    @POST("upload.php")
     Call<ServerResponse> upload(
             @PartMap Map<String, RequestBody> map
     );
