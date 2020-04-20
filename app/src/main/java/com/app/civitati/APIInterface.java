@@ -56,7 +56,7 @@ public interface APIInterface {
     Call<ResponseBody> updateHelpNeedy(@Query("ID") int id, @Query("NEEDY_ID") String needyId, @Query("HELP_INFO") String helpInfo, @Query("HELP_DATE") String helpDate, @Query("TYPE") String type );
 
     @GET("/needy.php")
-    Call<ResponseBody> updNeedy(@Query("ID") int id, @Query("NAME") String name, @Query("HELP_REASON") String reason, @Query("ADDRESS") String address, @Query("TELEPHONE") String telephone, @Query("TYPE") String type );
+    Call<ResponseBody> updNeedy(@Query("ID") int id, @Query("NAME") String name, @Query("HELP_REASON") String reason, @Query("ADDRESS") String address, @Query("TELEPHONE") String telephone, @Query("IMAGE") String image,  @Query("TYPE") String type );
 
     @GET("/notifications.php")
     Call<ArrayList<Notification>> getNotificationsForCurrentUser(@Query("USER_NICKNAME") String USER_NICKNAME, @Query("TYPE") String type );

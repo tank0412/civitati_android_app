@@ -18,6 +18,7 @@
     <string name="info_submit_date">Дата добавления:</string>
     <string name="report_delete_success">Запись успешно удалена</string>
     <string name="report_add_success">Запись успешно добавлена</string>
+    <string name="report_change_success">Запись успешно обновлена</string>
     <string name="report_update_success">Запись успешно добавлена</string>
     <string name="report_update_fail">Ошибка при добавлении записи</string>
     <string name="report_delete_fail">Ошибка при удалении записи</string>

@@ -45,6 +45,7 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
     TextView needyAddress;
     TextView needyTelephone;
     ImageView userAvatar;
+    String userAvatarFileName;
 
     public Needy needies;
     Context context;
@@ -52,6 +53,7 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
     UpdateNeedyFragment(Needy needies, Context context) {
         this.needies = needies;
         this.context = context;
+        userAvatarFileName = "";
 
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -108,6 +110,8 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
             if (requestCode == 1000) {
                 Uri returnUri = data.getData();
                 String picturePath = getPath( getActivity( ).getApplicationContext( ), returnUri );
+                File file = new File(picturePath);
+                userAvatarFileName = file.getName();
                 Log.d("Picture Path", picturePath);
                 Uri returnUri2 = Uri.fromFile(new File(picturePath));
                 Bitmap bitmapImage = null;
@@ -149,7 +153,7 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
 
-        Call<ResponseBody> tryToDelete = apiInterface.updNeedy(needies.getId(), needyName.getText().toString(), helpReason.getText().toString(), needyAddress.getText().toString(),needyTelephone.getText().toString(), "UR" );
+        Call<ResponseBody> tryToDelete = apiInterface.updNeedy(needies.getId(), needyName.getText().toString(), helpReason.getText().toString(), needyAddress.getText().toString(),needyTelephone.getText().toString(), userAvatarFileName, "UR" );
         tryToDelete.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -164,7 +168,7 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
                 Log.i("Civitati",  reponseString );
                 if(success.equals(reponseString)) {
                     Log.i("Civitati", "Success to update row. ");
-                    Toast.makeText(context,getContext().getString(R.string.report_update_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,getContext().getString(R.string.report_change_success), Toast.LENGTH_SHORT).show();
 
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
