@@ -23,31 +23,20 @@
         card_view:cardUseCompatPadding="true"
         card_view:contentPadding="10dp">
 
+        <ImageView
+            android:id="@+id/userAvatar"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/sampleavatar"
+            android:layout_marginStart="95dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.462"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/id"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|center_horizontal|top"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:gravity="center_vertical|center_horizontal|top"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/needyID"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="100dp"
-            android:gravity="center_vertical|center_horizontal|top"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/helpInfo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="150dp"
@@ -55,7 +44,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/helpDate"
+            android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="200dp"
@@ -63,10 +52,34 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/submitDate"
+            android:id="@+id/needyID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="250dp"
+            android:gravity="center_vertical|center_horizontal|top"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/helpInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="300dp"
+            android:gravity="center_vertical|center_horizontal|top"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/helpDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="350dp"
+            android:gravity="center_vertical|center_horizontal|top"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/submitDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="400dp"
             android:gravity="center_vertical|center_horizontal|top"
             android:hint="@string/hint_date"
             android:textSize="18sp"
@@ -82,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="360dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="400dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="parent"
