@@ -71,7 +71,7 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
         needyAddress.setText(needies.getAdress());
         needyTelephone.setText(needies.getTelephone().toString());
 
-        Button btn = root.findViewById(R.id.needyHelpBtn);
+        Button btn = root.findViewById(R.id.needySubmitBtn);
         btn.setOnClickListener(this);
 
         Button btnPhoto = root.findViewById(R.id.uploadImageBtn);
@@ -172,7 +172,7 @@ public class UpdateNeedyFragment extends Fragment implements View.OnClickListene
 
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-                    Button btn = root.findViewById(R.id.needyHelpBtn);
+                    Button btn = root.findViewById(R.id.needySubmitBtn);
                     btn.setVisibility(View.INVISIBLE);
                     Button btn2 = root.findViewById(R.id.uploadImageBtn);
                     btn2.setVisibility(View.INVISIBLE);

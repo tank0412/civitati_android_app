@@ -15,8 +15,7 @@
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/sampleavatar"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@mipmap/sampleavatar"/>
 
     <EditText
         android:id="@+id/needyName"
@@ -38,13 +37,13 @@
         android:text="@string/btn_upload_photo"
         android:backgroundTint="@color/colorAccent"
         android:textColor="@color/cardview_light_background"
-        app:layout_constraintBottom_toTopOf="@+id/needyHelpBtn"
+        app:layout_constraintBottom_toTopOf="@+id/needySubmitBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/needyHelpBtn"
+        android:id="@+id/needySubmitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_upd"

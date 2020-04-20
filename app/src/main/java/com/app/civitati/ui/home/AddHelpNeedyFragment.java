@@ -29,7 +29,7 @@ public class AddHelpNeedyFragment  extends Fragment implements View.OnClickListe
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_add_help_needy, container, false);
-        Button button = (Button)root.findViewById(R.id.needyHelpBtn);
+        Button button = (Button)root.findViewById(R.id.needySubmitBtn);
         button.setOnClickListener(this);
         return root;
     }

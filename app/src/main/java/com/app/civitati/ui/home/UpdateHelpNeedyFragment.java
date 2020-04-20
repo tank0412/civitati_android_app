@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import okhttp3.ResponseBody;
@@ -52,7 +51,7 @@ public class UpdateHelpNeedyFragment extends Fragment implements View.OnClickLis
         helpInfo = (TextView)root.findViewById(R.id.helpInfo);
         helpDate = (TextView)root.findViewById(R.id.helpDate);
 
-        Button btn = root.findViewById(R.id.needyHelpBtn);
+        Button btn = root.findViewById(R.id.needySubmitBtn);
         btn.setOnClickListener(this);
 
         System.out.println(needies.getId().toString());
@@ -105,7 +104,7 @@ public class UpdateHelpNeedyFragment extends Fragment implements View.OnClickLis
 
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-                    Button btn = root.findViewById(R.id.needyHelpBtn);
+                    Button btn = root.findViewById(R.id.needySubmitBtn);
                     btn.setVisibility(View.INVISIBLE);
                     needyId.setVisibility(View.INVISIBLE);
                     helpInfo.setVisibility(View.INVISIBLE);
