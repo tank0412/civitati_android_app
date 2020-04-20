@@ -30,6 +30,10 @@ public class Needy {
     @Expose
     private Date submitDate;
 
+    @SerializedName("image")
+    @Expose
+    private String image;
+
     public Integer getId() {
         return id;
     }
@@ -76,6 +80,14 @@ public class Needy {
 
     public void setSubmitDate(Date submitDate) {
         this.submitDate = submitDate;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 

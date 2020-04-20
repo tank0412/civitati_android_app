@@ -21,6 +21,7 @@ import com.app.civitati.APIClient;
 import com.app.civitati.APIInterface;
 import com.app.civitati.R;
 import com.app.civitati.ui.home.NHAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -74,6 +75,11 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
         //System.out.println(print.format(parsedDate));
         //System.out.println(parsedDate.toString());
         holder.needyDate.setText(context.getString(R.string.info_submit_date) + print.format(parsedDate));
+
+        String baseAvatarURL = "https://civitati.000webhostapp.com/";
+        Log.i("Civitati", baseAvatarURL + needies.get(position).getImage());
+
+        Picasso.get().load(baseAvatarURL + needies.get(position).getImage() ).into(holder.userAvatar);
 
         final NAdapter.NeedyViewHolder holderF = holder;
         final int positionF = position;
@@ -157,6 +163,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
         TextView needyAddress;
         TextView needyTelephone;
         TextView needyDate;
+        ImageView userAvatar;
         ImageView iv_menu;
         NeedyViewHolder(View itemView) {
             super(itemView);
@@ -167,6 +174,7 @@ public class NAdapter extends RecyclerView.Adapter<NAdapter.NeedyViewHolder>{
             needyAddress = (TextView)itemView.findViewById(R.id.helpInfo);
             needyTelephone = (TextView)itemView.findViewById(R.id.helpDate);
             needyDate = (TextView)itemView.findViewById(R.id.submitDate);
+            userAvatar = (ImageView) itemView.findViewById(R.id.userAvatar);
             iv_menu = itemView.findViewById(R.id.iv_menu);
         }
     }
