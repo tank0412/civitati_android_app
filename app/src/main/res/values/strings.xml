@@ -35,4 +35,5 @@
     <string name="info_logout_option">Выход из системы</string>
     <string name="report_logout">Выходим из системы....</string>
     <string name="report_logout_fail">Ошибка при выходе из системы</string>
+    <string name="report_no_internet">Нет Интернет соединения. Проверьте его и попробуйте ещё раз</string>
 </resources>

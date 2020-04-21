@@ -90,6 +90,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                     needyArrayList.addAll(jsonArray);
                 }
                 else {
+                    RecyclerView rv = root.findViewById(R.id.rv);
+                    rv.setVisibility(View.GONE);
+                    TextView noInternetReport = root.findViewById(R.id.report_no_internet);
+                    noInternetReport.setVisibility(View.VISIBLE);
                     return;
                 }
                 Log.i("Civitati", "GOT NEEDY ARRAY" );
