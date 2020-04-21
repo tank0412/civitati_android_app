@@ -44,6 +44,7 @@ public class NotificationsFragment extends Fragment {
         notificationArrayList = new ArrayList<Notification>();
         adapter = new NotifAdapter(notificationArrayList, getContext(), getChildFragmentManager(), root );
         rv.setAdapter(adapter);
+        rv.setVisibility(View.VISIBLE);
         getAllUserNotifications();
         return root;
     }
@@ -68,35 +69,15 @@ public class NotificationsFragment extends Fragment {
                     notificationArrayList.addAll(jsonArray);
                 }
                 else {
-
                     RecyclerView rv = root.findViewById(R.id.rv);
                     rv.setVisibility(View.GONE);
                     TextView noInternetReport = root.findViewById(R.id.report_no_internet);
                     noInternetReport.setVisibility(View.VISIBLE);
                     return;
                 }
-                Log.i("Civitati", "GOT NEEDY ARRAY" );
-                System.out.println("GOT NEEDDY");
+                Log.i("Civitati", "GOT NOTIFICATION ARRAY" );
+                System.out.println("GOT NOTIFICATION");
                 adapter.notifyDataSetChanged();
-
-                /*
-                for (int i = 0; i < jsonArray.size(); i++) {
-                    Needy needy = (Needy) jsonArray.get(i);
-
-                    int id = needy.getId();
-                    //System.out.println(String.valueOf(id));
-                    String name = needy.getName();
-                    //System.out.println(name);
-                    String helpReason =needy.getHelpReason();
-                    //System.out.println(helpReason);
-                    String address = needy.getAdress();
-                    //System.out.println(address);
-                    BigInteger telephone = needy.getTelephone();
-                    //System.out.println(String.valueOf(telephone));
-                    Date submitDate = needy.getSubmitDate();
-                    //System.out.println(submitDate);
-                }
-                 */
 
             }
             @Override
