@@ -31,10 +31,11 @@ public class NotificationsFragment extends Fragment {
 
     ArrayList<Notification> notificationArrayList;
     NotifAdapter adapter;
+    View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
         RecyclerView rv = root.findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
@@ -67,7 +68,11 @@ public class NotificationsFragment extends Fragment {
                     notificationArrayList.addAll(jsonArray);
                 }
                 else {
-                    return;
+
+                    RecyclerView rv = root.findViewById(R.id.rv);
+                    rv.setVisibility(View.GONE);
+                    TextView noInternetReport = root.findViewById(R.id.report_no_internet);
+                    noInternetReport.setVisibility(View.VISIBLE);
                 }
                 Log.i("Civitati", "GOT NEEDY ARRAY" );
                 System.out.println("GOT NEEDDY");
