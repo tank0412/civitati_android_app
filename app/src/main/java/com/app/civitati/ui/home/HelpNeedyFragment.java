@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -52,6 +53,8 @@ public class HelpNeedyFragment  extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         RecyclerView rv = root.findViewById(R.id.rv);
         rv.setVisibility(View.INVISIBLE);
+        TextView report_in_help_needy = root.findViewById(R.id.report_in_help_needy);
+        report_in_help_needy.setVisibility(View.GONE);
         System.out.println("CLICK");
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.helpNeedyInfo,  new AddHelpNeedyFragment());
@@ -76,7 +79,16 @@ public class HelpNeedyFragment  extends Fragment implements View.OnClickListener
             public void onResponse(Call<ArrayList<NeedyHelp>> call, Response<ArrayList<NeedyHelp>> response) {
                 ArrayList<NeedyHelp> jsonArray = response.body();
                 if(jsonArray != null) {
-                    needyHelpArrayList.addAll(jsonArray);
+                    if(jsonArray.size() > 0) {
+                        needyHelpArrayList.addAll(jsonArray);
+                    }
+                    else {
+                        RecyclerView rv = root.findViewById(R.id.rv);
+                        rv.setVisibility(View.GONE);
+                        TextView report_in_help_needy = root.findViewById(R.id.report_in_help_needy);
+                        report_in_help_needy.setText(R.string.report_no_help_needy_records);
+                        return;
+                    }
                 }
                 else {
                     return;

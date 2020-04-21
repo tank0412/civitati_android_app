@@ -41,4 +41,5 @@
     <string name="report_register_fail">Ошибка при регистрации</string>
     <string name="report_date_submit_fail">Некорретный формат даты</string>
     <string name="report_login_needed_in_notifications">Авторизируйтесь, чтобы увидеть уведомления</string>
+    <string name="report_no_help_needy_records">Вы еще не оставляли заявки на посещение нуждающихся</string>
 </resources>
