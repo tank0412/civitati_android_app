@@ -36,4 +36,8 @@
     <string name="report_logout">Выходим из системы....</string>
     <string name="report_logout_fail">Ошибка при выходе из системы</string>
     <string name="report_no_internet">Нет Интернет соединения. Проверьте его и попробуйте ещё раз</string>
+    <string name="report_login_fail">Ошибка при авторизации</string>
+    <string name="report_register_success">Успешная регистрация</string>
+    <string name="report_register_fail">Ошибка при регистрации</string>
+    <string name="report_date_submit_fail">Некорретный формат даты</string>
 </resources>

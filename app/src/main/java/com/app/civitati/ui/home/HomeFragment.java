@@ -142,7 +142,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if(fail.equals(reposne)) {
                         System.out.println("Login fail");
                         Log.i("Civitati", "Fail to login. ");
-                        loginInfo.setText("Login fail");
+                        loginInfo.setText(getContext().getString(R.string.report_login_fail));
                         loginInfo.setVisibility(View.VISIBLE);
                     }
 

@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="3dp"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/needySubmitBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

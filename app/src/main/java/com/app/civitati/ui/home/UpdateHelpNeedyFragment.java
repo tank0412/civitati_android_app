@@ -74,7 +74,7 @@ public class UpdateHelpNeedyFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-
+        final TextView needyHelpAddInfo = root.findViewById(R.id.needyHelpAddInfo);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy",
                 Locale.ENGLISH);
         Date parsedDate = null;
@@ -82,6 +82,10 @@ public class UpdateHelpNeedyFragment extends Fragment implements View.OnClickLis
             parsedDate = sdf.parse(helpDate.getText().toString());
         } catch (ParseException e) {
             e.printStackTrace();
+            Toast.makeText(context,getContext().getString(R.string.report_update_fail), Toast.LENGTH_SHORT).show();
+            needyHelpAddInfo.setText(getContext().getString(R.string.report_date_submit_fail));
+            needyHelpAddInfo.setVisibility(View.VISIBLE);
+            return;
         }
         SimpleDateFormat print = new SimpleDateFormat("yy-MM-dd"); // TODO: Исправить костыль с датой
 

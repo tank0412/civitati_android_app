@@ -54,7 +54,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     Log.i("Civitati",  reponseString );
                     if(success.equals(reponseString)) {
                         Log.i("Civitati", "Success in register. ");
-                        regResult.setText("Success in register");
+                        regResult.setText(getContext().getString(R.string.report_register_success));
                         enterPassword.setVisibility(View.INVISIBLE);
                         enterLogin.setVisibility(View.INVISIBLE);
                         regResult.setVisibility(View.INVISIBLE);
@@ -65,7 +65,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                         transaction.commit();
                     }
                     else {
-                        regResult.setText("Fail to register");
+                        regResult.setText(getContext().getString(R.string.report_register_fail));
                         regResult.setVisibility(View.VISIBLE);
                     }
 

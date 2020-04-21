@@ -78,13 +78,13 @@ public class AddHelpNeedyFragment  extends Fragment implements View.OnClickListe
                         if(success.equals(reponse)) {
                             System.out.println("Add needy add success");
                             Log.i("Civitati", "Success to add needy add. ");
-                            needyHelpAddInfo.setText("Needy help add success");
+                            needyHelpAddInfo.setText(getContext().getString(R.string.report_add_success));
                             needyHelpAddInfo.setVisibility(View.VISIBLE);
                         }
                         else {
                             System.out.println("Add needy add fail");
                             Log.i("Civitati", "Fail to add needy add. ");
-                            needyHelpAddInfo.setText("Needy help add fail");
+                            needyHelpAddInfo.setText(getContext().getString(R.string.report_add_fail));
                             needyHelpAddInfo.setVisibility(View.VISIBLE);
 
                         }
