@@ -73,6 +73,7 @@ public class NotificationsFragment extends Fragment {
                     rv.setVisibility(View.GONE);
                     TextView noInternetReport = root.findViewById(R.id.report_no_internet);
                     noInternetReport.setVisibility(View.VISIBLE);
+                    return;
                 }
                 Log.i("Civitati", "GOT NEEDY ARRAY" );
                 System.out.println("GOT NEEDDY");
