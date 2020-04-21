@@ -58,7 +58,7 @@ public class NotificationsFragment extends Fragment {
             userNickName = mySharedPreferences.getString("CIVITATI_PREFERENCES", "");
         }
         else {
-            TextView report_no_internet = root.findViewById(R.id.report_no_internet);
+            TextView report_no_internet = root.findViewById(R.id.report_notifications);
             report_no_internet.setText(getContext().getString(R.string.report_login_needed_in_notifications));
             report_no_internet.setVisibility(View.VISIBLE);
             return;
@@ -72,12 +72,22 @@ public class NotificationsFragment extends Fragment {
             public void onResponse(Call<ArrayList<Notification>> call, Response<ArrayList<Notification>> response) {
                 ArrayList<Notification> jsonArray = response.body();
                 if(jsonArray != null) {
-                    notificationArrayList.addAll(jsonArray);
+                    if(jsonArray.size() > 0) {
+                        notificationArrayList.addAll(jsonArray);
+                    }
+                    else {
+                        RecyclerView rv = root.findViewById(R.id.rv);
+                        rv.setVisibility(View.GONE);
+                        TextView report_in_help_needy = root.findViewById(R.id.report_notifications);
+                        report_in_help_needy.setText(R.string.report_no_notifications);
+                        report_in_help_needy.setVisibility(View.VISIBLE);
+                        return;
+                    }
                 }
                 else {
                     RecyclerView rv = root.findViewById(R.id.rv);
                     rv.setVisibility(View.GONE);
-                    TextView noInternetReport = root.findViewById(R.id.report_no_internet); //in notifications textview we ask to login if it is guest
+                    TextView noInternetReport = root.findViewById(R.id.report_notifications); //in notifications textview we ask to login if it is guest
                     noInternetReport.setVisibility(View.VISIBLE);
                     return;
                 }
