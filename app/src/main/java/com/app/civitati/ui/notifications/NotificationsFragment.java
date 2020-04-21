@@ -57,6 +57,12 @@ public class NotificationsFragment extends Fragment {
         if(mySharedPreferences.contains("CIVITATI_PREFERENCES")) {
             userNickName = mySharedPreferences.getString("CIVITATI_PREFERENCES", "");
         }
+        else {
+            TextView report_no_internet = root.findViewById(R.id.report_no_internet);
+            report_no_internet.setText(getContext().getString(R.string.report_login_needed_in_notifications));
+            report_no_internet.setVisibility(View.VISIBLE);
+            return;
+        }
         final String userNickNameF = userNickName;
 
         Call<ArrayList<Notification>> tryToRegister = apiInterface.getNotificationsForCurrentUser(userNickNameF, "SU" );
