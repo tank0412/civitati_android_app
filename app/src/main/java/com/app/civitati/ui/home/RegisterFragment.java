@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -54,6 +55,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     Log.i("Civitati",  reponseString );
                     if(success.equals(reponseString)) {
                         Log.i("Civitati", "Success in register. ");
+                        Toast.makeText(getContext(),getContext().getString(R.string.report_register_success), Toast.LENGTH_SHORT).show();
                         regResult.setText(getContext().getString(R.string.report_register_success));
                         enterPassword.setVisibility(View.INVISIBLE);
                         enterLogin.setVisibility(View.INVISIBLE);

@@ -77,7 +77,7 @@ public class NotificationsFragment extends Fragment {
                 else {
                     RecyclerView rv = root.findViewById(R.id.rv);
                     rv.setVisibility(View.GONE);
-                    TextView noInternetReport = root.findViewById(R.id.report_no_internet);
+                    TextView noInternetReport = root.findViewById(R.id.report_no_internet); //in notifications textview we ask to login if it is guest
                     noInternetReport.setVisibility(View.VISIBLE);
                     return;
                 }
