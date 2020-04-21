@@ -86,7 +86,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             @Override
             public void onResponse(Call<ArrayList<Needy>> call, Response<ArrayList<Needy>> response) {
                 ArrayList<Needy> jsonArray = response.body();
-                needyArrayList.addAll(jsonArray);
+                if(jsonArray != null) {
+                    needyArrayList.addAll(jsonArray);
+                }
+                else {
+                    return;
+                }
                 Log.i("Civitati", "GOT NEEDY ARRAY" );
                 System.out.println("GOT NEEDDY");
                 adapter.notifyDataSetChanged();

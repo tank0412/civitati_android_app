@@ -63,7 +63,12 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<Notification>> call, Response<ArrayList<Notification>> response) {
                 ArrayList<Notification> jsonArray = response.body();
-                notificationArrayList.addAll(jsonArray);
+                if(jsonArray != null) {
+                    notificationArrayList.addAll(jsonArray);
+                }
+                else {
+                    return;
+                }
                 Log.i("Civitati", "GOT NEEDY ARRAY" );
                 System.out.println("GOT NEEDDY");
                 adapter.notifyDataSetChanged();

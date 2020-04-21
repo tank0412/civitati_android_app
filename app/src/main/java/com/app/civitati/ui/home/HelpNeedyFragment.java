@@ -75,7 +75,12 @@ public class HelpNeedyFragment  extends Fragment implements View.OnClickListener
             @Override
             public void onResponse(Call<ArrayList<NeedyHelp>> call, Response<ArrayList<NeedyHelp>> response) {
                 ArrayList<NeedyHelp> jsonArray = response.body();
-                needyHelpArrayList.addAll(jsonArray);
+                if(jsonArray != null) {
+                    needyHelpArrayList.addAll(jsonArray);
+                }
+                else {
+                    return;
+                }
                 Log.i("Civitati", "GOT NEEDY HELP ARRAY" );
                 System.out.println("GOT NEEDDY HELP");
                 adapter.notifyDataSetChanged();
